@@ -12,7 +12,8 @@ function QuizGameSocketProvider({ children }: Props) {
   const default_data: ObjectInterface = {
     state: "0",
     countdown: 5,
-    isLose:true
+    isLose: true,
+    stats: [],
   };
   const [data, setData] = useState<ObjectInterface>(default_data);
   const [isConnected, setIsConnected] = useState(socket.connected);

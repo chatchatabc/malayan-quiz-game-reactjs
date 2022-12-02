@@ -8,7 +8,7 @@ function QuizQuestion() {
   const [start, setStart] = useState(false);
 
   useEffect(() => {
-    setStart(true);
+    if (!start) setStart(true);
     let interval: number;
     if (countdown) {
       interval = setInterval(() => {

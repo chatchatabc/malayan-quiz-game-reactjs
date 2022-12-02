@@ -37,7 +37,7 @@ function QuizGame() {
       <div className="mx-auto w-full max-w-lg flex-1">
         {data.state === "0" && <ScheduleDisplay />}
         {data.state === "1" && <WaitingDisplay />}
-        {data.state === "2" && <QuizDisplay />}
+        {data.state !== "0" && data.state !== "1" && <QuizDisplay />}
       </div>
     </div>
   );

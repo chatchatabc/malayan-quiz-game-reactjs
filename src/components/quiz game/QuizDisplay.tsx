@@ -7,8 +7,14 @@ function QuizDisplay() {
   const { data } = useContext(QuizGameSocketContext);
   const { countdown } = data;
   return (
-    <div className="h-screen flex flex-col relative">
-      <section className="">You Lose</section>
+    <div className="h-screen flex flex-col">
+      <section
+        className={`bg-red-600 duration-300 ease-linear text-white text-center font-bold ${
+          countdown ? "h-0" : "p-2"
+        }`}
+      >
+        You lost! But you can still continue playing!
+      </section>
       <section>
         <QuizQuestion />
       </section>
