@@ -5,29 +5,39 @@ import { ObjectInterface } from "../../helpers/commonInterface";
 function QuizQuestion() {
   const { data, setData } = useContext(QuizGameSocketContext);
   const { countdown } = data;
-  const [start, setStart] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!start) setStart(true);
-    let interval: number;
-    if (countdown) {
-      interval = setInterval(() => {
-        setData((prev: ObjectInterface) => ({
-          ...prev,
-          countdown: prev.countdown - 1,
-        }));
-      }, 1000);
+    if (loading) {
+      const { attrs } = data;
+      const { endTimestamp, startTimestamp } = attrs;
+      setData((prev: ObjectInterface) => ({
+        ...prev,
+        countdown: endTimestamp - startTimestamp,
+      }));
+      setLoading(false);
+    } else {
+      let interval: number;
+      if (countdown) {
+        interval = setInterval(() => {
+          setData((prev: ObjectInterface) => ({
+            ...prev,
+            countdown: prev.countdown - 1,
+          }));
+        }, 1000);
+      }
+      return () => {
+        clearInterval(interval);
+      };
     }
-    return () => {
-      clearInterval(interval);
-    };
   }, [countdown]);
+
   return (
     <div className="relative bg-neutral-100">
       <div
         style={{ transitionDuration: `${countdown ?? 10}s` }}
         className={`bg-blue-100 absolute inset-0 transition-all ease-linear ${
-          start ? "w-0" : "w-full"
+          !loading ? "w-0" : "w-full"
         }`}
       ></div>
       <div className="relative p-5 space-y-3">

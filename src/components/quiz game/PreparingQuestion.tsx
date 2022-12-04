@@ -1,7 +1,8 @@
 import React from "react";
+import MotionDiv from "../widgets/MotionDiv";
 
 function PreparingQuestion() {
-  return <div>PreparingQuestion</div>;
+  return <MotionDiv>PreparingQuestion</MotionDiv>;
 }
 
 export default PreparingQuestion;

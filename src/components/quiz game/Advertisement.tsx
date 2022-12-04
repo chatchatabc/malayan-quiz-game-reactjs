@@ -1,7 +1,8 @@
 import React from "react";
+import MotionDiv from "../widgets/MotionDiv";
 
 function Advertisement() {
-  return <div>Advertisement</div>;
+  return <MotionDiv>Advertisement</MotionDiv>;
 }
 
 export default Advertisement;
