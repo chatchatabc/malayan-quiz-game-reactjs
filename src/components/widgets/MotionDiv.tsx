@@ -1,23 +1,30 @@
-import React, { ReactNode } from "react";
+import React, { CSSProperties, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   className?: string;
+  initial?: Object extends CSSProperties ? Object : CSSProperties;
+  animate?: Object extends CSSProperties ? Object : CSSProperties;
+  transition?: Object extends CSSProperties ? Object : CSSProperties;
   children?: ReactNode;
 }
 
-function MotionDiv({ className, children }: Props) {
+function MotionDiv({
+  className,
+  initial = { opacity: 0 },
+  animate = { opacity: 1 },
+  transition = { duration: 0.5 },
+  children,
+}: Props) {
   return (
-    <AnimatePresence>
-      <motion.div
-        className={className}
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.5 }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      className={className}
+      initial={initial}
+      animate={animate}
+      transition={transition}
+    >
+      {children}
+    </motion.div>
   );
 }
 

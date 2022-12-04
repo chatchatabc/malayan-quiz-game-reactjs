@@ -10,10 +10,7 @@ export const QuizGameSocketContext = React.createContext<ObjectInterface>({});
 
 function QuizGameSocketProvider({ children }: Props) {
   const default_data: ObjectInterface = {
-    state: "0",
-    countdown: 5,
-    isLose: true,
-    stats: [],
+    stateNo: 0,
   };
   const [data, setData] = useState<ObjectInterface>(default_data);
   const [isConnected, setIsConnected] = useState(socket.connected);

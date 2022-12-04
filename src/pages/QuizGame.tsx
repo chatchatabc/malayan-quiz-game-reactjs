@@ -1,45 +1,29 @@
 import React, { useContext } from "react";
+import Advertisement from "../components/quiz game/Advertisement";
+import PreparingQuestion from "../components/quiz game/PreparingQuestion";
 import QuizDisplay from "../components/quiz game/QuizDisplay";
+import QuizState from "../components/quiz game/QuizState";
 import ScheduleDisplay from "../components/quiz game/ScheduleDisplay";
 import WaitingDisplay from "../components/quiz game/WaitingDisplay";
 import { QuizGameSocketContext } from "../contexts/QuizGameSocketProvider";
-import { ObjectInterface } from "../helpers/commonInterface";
+
+const in_game_states = ["START_QUESTION", "END_QUESTION", "SHOW_ANSWER"];
 
 function QuizGame() {
-  const { data, setData } = useContext(QuizGameSocketContext);
+  const { data } = useContext(QuizGameSocketContext);
 
   return (
     <div className="bg-neutral-50 h-screen flex flex-col">
       {/* State Controller */}
-      <section className="flex justify-around py-10 border-4">
-        <button
-          onClick={() =>
-            setData((prev: ObjectInterface) => {
-              const state = (parseInt(prev.state) - 1).toString();
-              return { ...prev, state };
-            })
-          }
-        >
-          Back
-        </button>
-        {data.state}
-        <button
-          onClick={() =>
-            setData((prev: ObjectInterface) => {
-              const state = (parseInt(prev.state) + 1).toString();
-              return { ...prev, state };
-            })
-          }
-        >
-          Next
-        </button>
-      </section>
+      <QuizState />
 
       {/* Main Content */}
       <div className="mx-auto w-full max-w-lg flex-1">
-        {data.state === "0" && <ScheduleDisplay />}
-        {data.state === "1" && <WaitingDisplay />}
-        {data.state !== "0" && data.state !== "1" && <QuizDisplay />}
+        {data.state === "NONE" && <ScheduleDisplay />}
+        {data.state === "QUEUEING" && <WaitingDisplay />}
+        {data.state === "STARTED" && <Advertisement />}
+        {data.state === "GET_READY" && <PreparingQuestion />}
+        {in_game_states.includes(data.state) && <QuizDisplay />}
       </div>
     </div>
   );
