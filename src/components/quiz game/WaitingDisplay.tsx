@@ -1,8 +1,9 @@
 import React from "react";
+import MotionDiv from "../widgets/MotionDiv";
 
 function WaitingDisplay() {
   return (
-    <div>
+    <MotionDiv>
       <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
         <div className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
           <div>
@@ -26,7 +27,7 @@ function WaitingDisplay() {
           </div>
         </div>
       </div>
-    </div>
+    </MotionDiv>
   );
 }
 
