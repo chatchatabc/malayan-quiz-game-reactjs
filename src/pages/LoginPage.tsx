@@ -20,7 +20,7 @@ function LoginPage() {
       <section className="text-center">
         <img
           className="w-1/2 aspect-square mx-auto"
-          src="/images/logo.png"
+          src="/images/login logo.png"
           alt="logo"
         />
         <h2 className="text-3xl">ChatChatABC Quiz</h2>
