@@ -4,7 +4,8 @@ import { ObjectInterface } from "../../helpers/commonInterface";
 
 function QuizQuestion() {
   const { data, setData } = useContext(QuizGameSocketContext);
-  const { countdown } = data;
+  const { countdown, attrs } = data;
+  const { question } = attrs;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -73,10 +74,7 @@ function QuizQuestion() {
           </div>
         </div>
         <div className="text-justify font-bold leading-tight text-xl">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Porro neque
-          sit quis blanditiis aliquid voluptates ratione explicabo, qui
-          repudiandae. Architecto commodi possimus corrupti labore culpa
-          doloremque beatae saepe officiis maiores.
+          {question}
         </div>
       </div>
     </div>

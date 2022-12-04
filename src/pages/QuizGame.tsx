@@ -13,12 +13,12 @@ function QuizGame() {
   const { data } = useContext(QuizGameSocketContext);
 
   return (
-    <div className="bg-neutral-50 h-screen flex flex-col">
+    <div className="bg-neutral-50 flex flex-col flex-1">
       {/* State Controller */}
       <QuizState />
 
       {/* Main Content */}
-      <div className="mx-auto w-full max-w-lg flex-1">
+      <div className="mx-auto w-full max-w-lg flex-1 flex flex-col">
         {data.state === "NONE" && <ScheduleDisplay />}
         {data.state === "QUEUEING" && <WaitingDisplay />}
         {data.state === "STARTED" && <Advertisement />}

@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import { QuizGameSocketContext } from "../../contexts/QuizGameSocketProvider";
 
-const choices = [{}, {}, {}, {}];
-
 function QuizChoices() {
   const { data } = useContext(QuizGameSocketContext);
-  const { countdown } = data;
+  const { countdown, attrs = {} } = data;
+  const { choices = {} } = attrs;
   const [userAnswer, setUserAnswer] = useState(0);
   const [closeSelection, setCloseSelection] = useState(false);
+  console.log(data);
 
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     setCloseSelection(true);
@@ -16,10 +16,10 @@ function QuizChoices() {
 
   return (
     <div className="p-5 space-y-5">
-      {choices.map((x, index) => {
+      {Object.entries(choices).map((x, index) => {
         // Normal
         let status = "bg-gray-200";
-        if (data.state === "2") {
+        if (data.state === "START_QUESTION") {
           // Disabled
           if (countdown && !closeSelection) status = "border";
           // User Answer

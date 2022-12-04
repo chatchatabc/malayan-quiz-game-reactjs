@@ -16,7 +16,7 @@ function QuizGameLayout() {
     }
   }, []);
   return (
-    <div className="bg-neutral-50 h-screen flex flex-col">
+    <div className="bg-neutral-50 min-h-screen flex flex-col">
       {/* Navbar */}
       <section className="bg-blue-700 p-2">
         <div className="mx-auto max-w-lg w-full flex justify-between items-center">

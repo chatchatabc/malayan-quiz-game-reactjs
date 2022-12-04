@@ -7,7 +7,7 @@ import QuizQuestion from "./QuizQuestion";
 function QuizDisplay() {
   const { data } = useContext(QuizGameSocketContext);
   return (
-    <div className="h-screen flex flex-col">
+    <MotionDiv className="flex-1 flex flex-col">
       {/* Banner */}
       {data.state === "3" && (
         <MotionDiv
@@ -26,7 +26,7 @@ function QuizDisplay() {
       <section className="flex-1 overflow-y-auto">
         <QuizChoices />
       </section>
-    </div>
+    </MotionDiv>
   );
 }
 
