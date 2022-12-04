@@ -5,7 +5,7 @@ import { ObjectInterface } from "../helpers/commonInterface";
 interface Props {
   children: React.ReactNode;
 }
-const socket = io();
+const socket = io("http://quiz.chatchatabc.com");
 export const QuizGameSocketContext = React.createContext<ObjectInterface>({});
 
 function QuizGameSocketProvider({ children }: Props) {

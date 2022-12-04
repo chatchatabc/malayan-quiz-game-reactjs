@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { QuizGameSocketContext } from "../../contexts/QuizGameSocketProvider";
+import { ObjectInterface } from "../../helpers/commonInterface";
 
 function QuizChoices() {
   const { data } = useContext(QuizGameSocketContext);
@@ -7,7 +8,6 @@ function QuizChoices() {
   const { choices = {} } = attrs;
   const [userAnswer, setUserAnswer] = useState(0);
   const [closeSelection, setCloseSelection] = useState(false);
-  console.log(data);
 
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     setCloseSelection(true);
@@ -16,7 +16,7 @@ function QuizChoices() {
 
   return (
     <div className="p-5 space-y-5">
-      {Object.entries(choices).map((x, index) => {
+      {Object.entries(choices).map(([key, value], index: number) => {
         // Normal
         let status = "bg-gray-200";
         if (data.state === "START_QUESTION") {
@@ -47,7 +47,7 @@ function QuizChoices() {
             onClick={handleButton}
             className={`block w-full rounded-md py-3 px-6 font-bold text-left border-gray-400 ${status}`}
           >
-            Button Text
+            {value as string}
           </button>
         );
       })}

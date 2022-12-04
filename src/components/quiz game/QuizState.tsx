@@ -58,7 +58,10 @@ const data_state: ObjectInterface = {
 };
 
 const changeState = (stateNo: number, setData: any) => {
-  setData({ ...data_state[stateNo.toString()], stateNo });
+  setData((prev: ObjectInterface) => {
+    const { state, attrs } = data_state[stateNo.toString()];
+    return { ...prev, state, attrs: { ...prev.attrs, ...attrs }, stateNo };
+  });
 };
 
 function QuizState() {

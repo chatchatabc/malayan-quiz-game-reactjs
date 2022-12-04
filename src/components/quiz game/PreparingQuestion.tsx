@@ -17,7 +17,7 @@ function PreparingQuestion() {
     }
   }, [timer]);
   return (
-    <MotionDiv className="px-2 flex flex-col flex-1 items-center border">
+    <MotionDiv className="px-2 flex flex-col flex-1 items-center">
       <h2 className="py-20 text-5xl">Get Ready in...</h2>
       <div className="relative rounded-full w-1/2 aspect-square overflow-hidden flex justify-center items-center">
         <div
@@ -26,7 +26,9 @@ function PreparingQuestion() {
           }`}
         ></div>
         <div className="bg-neutral-50 rounded-full w-[90%] aspect-square relative flex justify-center items-center p-5">
-          <p className="text-3xl font-bold">{timer}</p>
+          <p className={`text-5xl font-bold ${timer ? "animate-bounce" : ""}`}>
+            {timer}
+          </p>
         </div>
       </div>
     </MotionDiv>
