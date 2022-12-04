@@ -17,12 +17,26 @@ function QuizGameLayout() {
   }, []);
   return (
     <div className="bg-neutral-50 h-screen flex flex-col">
+      {/* Navbar */}
       <section className="bg-blue-700 p-2">
         <div className="mx-auto max-w-lg w-full flex justify-between items-center">
           <img src="/images/logo.png" className="w-12" />
-          <p className="font-bold text-white">Student ID</p>
+          <div>
+            <p className="font-bold text-white">Student ID</p>
+            <button
+              onClick={() => {
+                localStorage.clear();
+                navigate("/login");
+              }}
+              className="font-bold text-white bg-red-500 px-2 rounded-lg"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </section>
+
+      {/* Content */}
       <QuizGameSocketProvider>
         <Outlet />
       </QuizGameSocketProvider>
