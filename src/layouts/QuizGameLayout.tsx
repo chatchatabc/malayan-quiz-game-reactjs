@@ -21,8 +21,10 @@ function QuizGameLayout() {
       <section className="bg-blue-700 p-2">
         <div className="mx-auto max-w-lg w-full flex justify-between items-center">
           <img src="/images/logo.png" className="w-12" />
-          <div>
-            <p className="font-bold text-white">Student ID</p>
+          <div className="flex flex-col items-end">
+            <p className="font-bold text-white">
+              ID: {localStorage.student_id}
+            </p>
             <button
               onClick={() => {
                 localStorage.clear();
