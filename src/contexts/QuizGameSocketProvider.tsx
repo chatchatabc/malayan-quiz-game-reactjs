@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
+import SockJS from "sockjs-client";
 import { ObjectInterface } from "../helpers/commonInterface";
 
+export const QuizGameSocketContext = React.createContext<ObjectInterface>({});
 interface Props {
   children: React.ReactNode;
 }
-const socket = io("http://quiz.chatchatabc.com");
-export const QuizGameSocketContext = React.createContext<ObjectInterface>({});
+const sock = new SockJS("https://quiz.chatchatabc.com/backend");
 
 function QuizGameSocketProvider({ children }: Props) {
   const default_data: ObjectInterface = {
@@ -15,39 +15,35 @@ function QuizGameSocketProvider({ children }: Props) {
     countdown: 10,
   };
   const [data, setData] = useState<ObjectInterface>(default_data);
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [lastPong, setLastPong] = useState<string | null>(null);
-  const value = { data, setData };
 
   useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
-    });
+    sock.onopen = function () {
+      console.log("open");
+      sock.send("test");
+    };
 
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
+    sock.onmessage = function (e) {
+      console.log("message", e.data);
+      sock.close();
+    };
 
-    socket.on("pong", () => {
-      setLastPong(new Date().toISOString());
-    });
+    sock.onclose = function () {
+      console.log("close");
+    };
 
     return () => {
-      socket.off("connect");
-      socket.off("disconnect");
-      socket.off("pong");
+      sock.close();
     };
   }, []);
 
-  const sendPing = () => {
-    socket.emit("ping");
+  const sendMessage = (message: string) => {
+    sock.send(message);
   };
+
+  const value = { data, setData, sendMessage };
 
   return (
     <QuizGameSocketContext.Provider value={value}>
-      {/* <p>Connected: {"" + isConnected}</p>
-      <p>Last pong: {lastPong || "-"}</p>
-      <button onClick={sendPing}>Send ping</button> */}
       {children}
     </QuizGameSocketContext.Provider>
   );
