@@ -6,17 +6,23 @@ import QuizQuestion from "./QuizQuestion";
 
 function QuizDisplay() {
   const { data } = useContext(QuizGameSocketContext);
+  const { attrs = {} } = data;
+  const { isCorrect } = attrs;
   return (
     <MotionDiv className="flex-1 flex flex-col">
       {/* Banner */}
-      {data.state === "3" && (
+      {data.state === "SHOW_ANSWER" && (
         <MotionDiv
-          className={`bg-red-600 duration-300 ease-linear text-white text-center font-bold`}
+          className={`${
+            isCorrect ? "bg-green-500" : "bg-red-500"
+          } duration-300 ease-linear text-white text-center font-bold`}
           initial={{ height: 0 }}
           animate={{ height: "unset", padding: "0.5rem" }}
           transition={{ duration: 0.3 }}
         >
-          You lost! But you can still continue playing!
+          {isCorrect
+            ? "You're Correct! Please wait for the next question!"
+            : "You lost! But you can still continue playing!"}
         </MotionDiv>
       )}
 
