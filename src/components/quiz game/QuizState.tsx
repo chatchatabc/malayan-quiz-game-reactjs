@@ -39,12 +39,12 @@ const data_state: ObjectInterface = {
     attrs: {
       questionUUID: "8877264e-f25c-4bc6-8609-1d60006130cb",
       answerStats: {
-        "2f0939a4-56e8-4555-994b-93426508291e": 0,
-        "19afb941-afbe-4038-9935-9275c8356926": 0,
-        "ec1fbeb6-7999-44d6-9184-2a9c6fc3075c": 0,
-        "f084d48b-5965-4de9-b0cf-b7a613924154": 0,
+        "39ee328d-4b99-4580-92b5-edf4cf014afd": 0,
+        "c9837ff5-ecc6-46b3-80d3-556800b1b610": 0,
+        "3047afe7-f16b-4ecf-a51b-293cc4c24fb6": 0,
+        "f71f9d30-6d79-4382-bcb0-0bf26c7bb465": 0,
       },
-      answerUUID: "2f0939a4-56e8-4555-994b-93426508291e",
+      answerUUID: "39ee328d-4b99-4580-92b5-edf4cf014afd",
       isCorrect: false,
     },
   },

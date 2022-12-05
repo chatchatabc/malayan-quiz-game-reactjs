@@ -5,6 +5,7 @@ import QuizDisplay from "../components/quiz game/QuizDisplay";
 import QuizState from "../components/quiz game/QuizState";
 import ScheduleDisplay from "../components/quiz game/ScheduleDisplay";
 import WaitingDisplay from "../components/quiz game/WaitingDisplay";
+import WinnersDisplay from "../components/quiz game/WinnersDisplay";
 import { QuizGameSocketContext } from "../contexts/QuizGameSocketProvider";
 
 const in_game_states = ["START_QUESTION", "END_QUESTION", "SHOW_ANSWER"];
@@ -24,6 +25,7 @@ function QuizGame() {
         {data.state === "STARTED" && <Advertisement />}
         {data.state === "GET_READY" && <PreparingQuestion />}
         {in_game_states.includes(data.state) && <QuizDisplay />}
+        {data.state === "SHOW_WINNERS" && <WinnersDisplay />}
       </div>
     </div>
   );
