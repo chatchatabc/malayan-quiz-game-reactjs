@@ -1,9 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { QuizGameSocketContext } from "../../contexts/QuizGameSocketProvider";
+import { ObjectInterface } from "../../helpers/commonInterface";
 import MotionDiv from "../widgets/MotionDiv";
 
 function QuizChoices() {
-  const { data } = useContext(QuizGameSocketContext);
+  const { data, setData } = useContext(QuizGameSocketContext);
   const { countdown, attrs = {} } = data;
   const { choices = {}, answerStats = {}, answerUUID = "" } = attrs;
   const [userAnswer, setUserAnswer] = useState(0);
@@ -14,13 +15,22 @@ function QuizChoices() {
     setUserAnswer(parseInt(e.currentTarget.value));
   };
 
+  useEffect(() => {
+    if (data.state === "END_QUESTION") {
+      setCloseSelection(true);
+      setData((prev: ObjectInterface) => {
+        return { ...prev, countdown: 0 };
+      });
+    }
+  }, [data.state]);
+
   return (
     <MotionDiv className="p-5 space-y-5">
       {Object.entries(choices).map(([key, value], index: number) => {
         // Normal
         let status = "bg-gray-200";
         let background = "bg-gray-200";
-        if (data.state === "START_QUESTION") {
+        if (data.state === "START_QUESTION" || data.state === "END_QUESTION") {
           // Disabled
           if (countdown && !closeSelection) status = "border";
           // User Answer

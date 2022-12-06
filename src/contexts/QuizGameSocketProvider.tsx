@@ -19,12 +19,12 @@ function QuizGameSocketProvider({ children }: Props) {
   useEffect(() => {
     sock.onopen = function () {
       console.log("open");
-      sock.send("test");
+      // sock.send(JSON.stringify({ studentId: "123", name: "Bon" }));
     };
 
     sock.onmessage = function (e) {
       console.log("message", e.data);
-      sock.close();
+      // sock.close();
     };
 
     sock.onclose = function () {
@@ -32,12 +32,12 @@ function QuizGameSocketProvider({ children }: Props) {
     };
 
     return () => {
-      sock.close();
+      // sock.close();
     };
   }, []);
 
   const sendMessage = (message: string) => {
-    sock.send(message);
+    // sock.send(message);
   };
 
   const value = { data, setData, sendMessage };
